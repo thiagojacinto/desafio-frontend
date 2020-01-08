@@ -1,0 +1,45 @@
+/* Coolors: https://coolors.co/8c75ff-72ffb6-dfff77-ff70e2-70e2ff */
+
+* {
+  box-sizing: border-box;
+  font-family: 'Ubuntu', Helvetica, sans-serif;
+}
+
+html,body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 90vw;
+  height: 100vh;
+  background-image: linear-gradient(45deg, #8c75ff, #b8abf7);
+  
+  display: grid;
+  
+  grid-gap: 10vw;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+
+  justify-self: center;
+}
+
+#main.input__search {
+  width: 80%;
+  height: 35%;
+  
+  background-image: linear-gradient(45deg, #7b72ff, #9069fd);
+  justify-self: center;
+  align-self: center;
+
+  border-radius: 10px;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+}
