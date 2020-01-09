@@ -1,5 +1,9 @@
 /* Coolors: https://coolors.co/8c75ff-72ffb6-dfff77-ff70e2-70e2ff */
 
+:root {
+  --rotate-search-magnifying-glass: -50deg;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Ubuntu', Helvetica, sans-serif;
@@ -11,14 +15,14 @@ html,body {
 }
 
 body {
-  width: 90vw;
+ 
   height: 100vh;
   background-image: linear-gradient(45deg, #8c75ff, #b8abf7);
   
   display: grid;
   
   grid-gap: 5vw;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 10vh auto 10vh;
   grid-template-rows: 10vh auto;
   justify-content: center;
   align-items: center;
@@ -28,7 +32,7 @@ body {
 
 header {
   grid-row: 1 / 2;
-  grid-column: 1 / 3;
+  grid-column: 1 / 4;
 
   justify-self: center;
   
@@ -47,21 +51,57 @@ header {
 #main .search__input {
   background-image: linear-gradient(45deg, #7b72ff, #9069fd);
 
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
-#main input, button {
+.search__input input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 15px;
+
   font-size: 1.2rem;
 
-  justify-self: center;
-  align-self: center;
+  position: relative;
 }
+
+.search__input button {
+  background-color: transparent;
+  border: transparent;
+
+  position: relative;
+  bottom: 3rem;
+  left: 14.5rem;
+
+  font-size: 3rem;
+  
+  transform: rotate(var(--rotate-search-magnifying-glass));
+  -o-transform: rotate(var(--rotate-search-magnifying-glass));
+  -ms-transform: rotate(var(--rotate-search-magnifying-glass));
+  -webkit-transform: rotate(var(--rotate-search-magnifying-glass));
+  -moz-transform: rotate(var(--rotate-search-magnifying-glass));
+
+  transition: all .1s ease-in-out;
+  -o-transition: all .1s ease-in-out;
+  -moz-transition: all .1s ease-in-out;
+  -webkit-transition: all .1s ease-in-out;
+  -ms-transistion: all .1s ease-in-out;
+}
+
+.search__icon:hover,
+.search__icon:focus {
+  -o-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
 
 #main input::placeholder {
   color: #bdbdbd;
   font-style: italic;
 }
 
-.search__input button {
-  position: relative;
+.capitals__list {
+  font-size: 1.3rem;
 }
