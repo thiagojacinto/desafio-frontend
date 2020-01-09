@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SearchForm from './components/searchForm.jsx';
+import SearchForm from './components/SearchForm.jsx';
 import Capitals from './components/Capitals.js';
 
 function Main () {
