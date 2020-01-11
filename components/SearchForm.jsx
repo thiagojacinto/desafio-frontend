@@ -1,10 +1,51 @@
 import React, { useState, useEffect } from 'react';
 
-// import retrieveData from '../core-api';
+import { Found } from './FoundLocal';
 
 export default function SearchForm(props) {
 
-  const [weather, setWeather] = useState();
+  const blankWeather = {
+    "coord": { "lon": undefined, "lat": undefined },
+    "weather": [
+      {
+        "id": undefined,
+        "main": "",
+        "description": "",
+        "icon": ""
+      }
+    ],
+    "base": "",
+    "main": {
+      "temp": undefined,
+      "feels_like": undefined,
+      "temp_min": undefined,
+      "temp_max": undefined,
+      "pressure": undefined,
+      "humidity": undefined
+    },
+    "wind": {
+      "speed": undefined,
+      "deg": undefined
+    },
+    "clouds": {
+      "all": undefined
+    },
+    "dt": undefined,
+    "sys": {
+      "type": undefined,
+      "id": undefined,
+      "message": undefined,
+      "country": "",
+      "sunrise": undefined,
+      "sunset": undefined
+    },
+    "timezone": undefined,
+    "id": undefined,
+    "name": "",
+    "cod": undefined
+  }
+
+  const [weather, setWeather] = useState(blankWeather);
   const [location, setLocation] = useState("");
   const [count, setCount] = useState(0);
 
@@ -13,38 +54,15 @@ export default function SearchForm(props) {
     event.preventDefault();
     // alert('Searching...'); // placeholder
     const city = document.getElementsByClassName('search__value').city.defaultValue;
-    console.log(city);
+    console.log(city);    // Verify
 
     setLocation(city);    // Set the location
     setCount(count + 1);  // Changes count when clicked
-
-    setInterval(() => {
-      (weather !== null) ?
-        foundLocation()
-        : undefinedLocation();
-    }, 300)
     
   }
 
   function foundLocation() {
-    return (
-      <div className="found__location">
-        <p className="cityName">{weather.name}, {weather.sys.country}</p>
-        <div className="temperature">
-          <p className="temp">
-            Temperatura: {weather.main.temp}&deg;
-        </p>
-          <p className="condition">
-            {weather.weather[0].main}
-          </p>
-        </div>
-        <div className="miscInfo">
-
-          <p className="sunrise">Amanhecer: {weather.sys.sunrise}</p>
-          <p className="sunset">Pôr do sol: {weather.sys.sunset}</p>
-        </div>
-      </div>
-    );
+    return <Found weather={weather} />;
   }
 
   function undefinedLocation() {
@@ -56,22 +74,22 @@ export default function SearchForm(props) {
   // function: JSX of found location data
   useEffect(() => {
 
+    setInterval(() => {}, 2000);
+
     const keychain = 'a13ec42cc6dbb8f4dd28dcd88312d0ca';
     // URL management: 
     const basicUrl = `http://api.openweathermap.org/data/2.5/weather?q=`;
     const appendKey = `&appid=` + keychain;
-    var finalUrl = basicUrl + location + appendKey;
+    var finalUrl = basicUrl + location + appendKey + `&units=metric&lang=pt_br`;;
 
     // Fetching:
     fetch(finalUrl)
       .then(resp => resp.json())
       .then(data => {
-        
+        // Changes 'weather' state:
         setWeather(data);
-        console.log(data);
       });
-
-  }, []);
+  }, [location]);
 
   return (
     <div className="search__input">
@@ -88,6 +106,10 @@ export default function SearchForm(props) {
         </label>
         <button className='search__icon'>&#9906;</button>
       </form>
+      { (count > 1) ?
+        (location !== '' ? foundLocation() : undefinedLocation())
+        : <br />
+      }
     </div>
   );
 }

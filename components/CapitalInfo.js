@@ -1,24 +1,42 @@
-import React from 'react';
-
-// import retrieveData from '../core-api';
+import React, { useState, useEffect } from 'react';
 
 export default function CapitalInfo(props) {
 
-  // var data = retrieveData(props.city);
-  var data = {
-    main: {
-      temp_min: 23,
-      temp_max: 32
-    }
+  var initialData = {
+    "temp": undefined,
+    "feels_like": undefined,
+    "temp_min": undefined,
+    "temp_max": undefined,
+    "pressure": undefined ,
+    "humidity": undefined
   }
   
-  const [ tempMin, tempMax ] = [data.main.temp_min, data.main.temp_max];
+  const [ temperature, setTemperature ] = useState(initialData);
+
   
+  useEffect(() => {
+
+    const keychain = 'a13ec42cc6dbb8f4dd28dcd88312d0ca';
+    // URL management: 
+    const basicUrl = `http://api.openweathermap.org/data/2.5/weather?q=`;
+    const appendKey = `&appid=` + keychain + `&units=metric&lang=pt_br`;
+    var finalUrl = basicUrl + props.city + appendKey;
+
+    // Fetching:
+    fetch(finalUrl)
+      .then(resp => resp.json())
+      .then(data => {
+        // Changes 'temperature' state:
+        setTemperature(data.main);
+      });
+  }, [props.city]);
+
   return (
     <li className="capitalItem">
       <p className="cityName">{props.city}</p>
-      <p className="temp">ᐱ Máx: {tempMax}&deg;</p>
-      <p className="temp">ᐯ Min: {tempMin}&deg;</p>
+      <p className="temp">ᐱ Máx: {temperature.temp_max}&deg;</p>
+      <p className="temp">ᐯ Min: {temperature.temp_min}&deg;</p>
+      <p className="humidity">Umidade: {temperature.humidity}%</p>
     </li>
   );
 }
