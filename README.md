@@ -2,7 +2,7 @@
 
 O código desenvolvido tem a pretensão de ser uma proposta de solução ao desafio proposto pela [1STi](https://github.com/1STi/desafio-frontend). 
 
-As instruções fornecidas se encontram no arquivo [`INSTRUCITONS.md`](/thiago-jacinto'/INSTRUCTIONS.md)
+As instruções fornecidas se encontram no arquivo [`INSTRUCTIONS.md`](https://github.com/thiagojacinto/desafio-frontend/blob/thiago-jacinto'/INSTRUCTIONS.md)
 
 ## Resumo das atividades:
 
